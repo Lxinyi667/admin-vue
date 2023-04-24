@@ -25,8 +25,9 @@ const { formDrawerRef, form, rules, formRef, onSubmit, openRepasswordForm } = us
 			<IEpFold v-if="sideWidth === '220px'" />
 			<IEpExpand v-else />
 		</div>
-
+<!-- 实现全屏按钮功能 -->
 		<div class="ml-auto v-center">
+			<!-- 刷新按钮 -->
 			<IEpRefresh @click="handleRefresh" class="icon" />
 			<div @click="toggle" class="icon v-center">
 				<IEpFullScreen v-if="!isFullscreen" />

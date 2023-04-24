@@ -1,6 +1,6 @@
 <script setup>
-// const store = useAdminStore()
-// const { sideWidth } = storeToRefs(store)
+const store = useAdminStore()
+const { sideWidth } = storeToRefs(store)
 </script>
 
 <template>
@@ -10,7 +10,7 @@
       </el-header>
   
       <el-container>
-        <el-aside>
+        <el-aside :style="{ width: sideWidth }">
           <side-menu />
         </el-aside>
   
