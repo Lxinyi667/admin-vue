@@ -1,3 +1,5 @@
+import { removeTabList } from "../utils/storage"
+
 export const useAdminStore = defineStore('admin', {
   state: () => ({
     adminInfo: {},
@@ -38,6 +40,7 @@ export const useAdminStore = defineStore('admin', {
         logout()
           .then(() => {
             removeToken()
+            removeTabList()
             this.adminInfo = {}
             resolve()
           })
