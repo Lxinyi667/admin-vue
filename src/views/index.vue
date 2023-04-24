@@ -13,10 +13,10 @@
 // import { login } from '@/api/auth'
 <script setup>
 
-  const form = reactive({
-    username:'admin',
-    password:'123456'
-  })
+  // const form = reactive({
+  //   username:'admin',
+  //   password:'123456'
+  // })
 
   // const handleLogin = ()=>{
   //     login(form).then(res =>{
