@@ -28,6 +28,6 @@ module.exports = {
 	rules: {
 		curly: 'error', // 控制语句需要大括号
 		'vue/multi-word-component-names': 'off', // 组件名不需要多个单词
-		'no-undef': 'off' // 未定义的报错
+		'no-undef': 'off' // 忽略未定义的报错
 	}
 }

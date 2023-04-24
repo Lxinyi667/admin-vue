@@ -16,6 +16,7 @@ export default defineConfig({
   plugins: [
     vue(),
     WindCSS(),
+    // 自动导入
     AutoImport({
       imports: [
         'vue',
@@ -23,7 +24,10 @@ export default defineConfig({
         '@vueuse/core',
         'pinia',
         {
-          'vue-router': ['onBeforeRouteLeave']
+          'vue-router': ['onBeforeRouteLeave'],
+          '@/utils/tools': ['toast','showModal'],
+          '@/utils/storage': ['getToken','setToken','removeToekn'],
+          '@/api/auth': ['login','logout','getCaptcha']
         }
       ],
       //指定文件夹位置 , 加 /**可遍历子目录

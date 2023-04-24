@@ -12,15 +12,16 @@
 </template> -->
 <script setup>
   import { login } from '@/api/auth'
+  
   const form = reactive({
     username:'admin',
     password:'123456'
   })
 
   const handleLogin = ()=>{
-    login(form).then(res=>{
-    console.log(res.data.data);
-  })
+      login(form).then(res =>{
+      console.log(res);
+    })
   }
 
 </script>
