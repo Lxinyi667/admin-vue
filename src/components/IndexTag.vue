@@ -1,11 +1,11 @@
 <script setup>
 defineProps({
     title:String,//标题
-    tip: String,//提示
+    tip:String,//提示
     btns :Array//按钮组
 })
 //给标签配上―组颜色
-const colors = ['#22d3ee ' , '#22c55e ' , ' #d6d3d1', '#f59e0b ']
+const colors = ['#22d3ee' , '#22c55e' , '#d6d3d1', '#f59e0b ']
 
 </script>
 
@@ -13,7 +13,7 @@ const colors = ['#22d3ee ' , '#22c55e ' , ' #d6d3d1', '#f59e0b ']
     <el-card class="shadow" >
         <template #header>
             <div class="f-between ">
-                <span class="text-sm">{{ title }}  </span>
+                <span class="text-sm">{{ title }} </span>
                 <el-tag type="danger" effect="plain">
                     {{ tip }} 
                 </el-tag>
