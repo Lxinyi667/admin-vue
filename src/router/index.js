@@ -117,26 +117,24 @@ export const router = createRouter({
   history: createWebHistory(),
 })
 
-// 动态添加路由的方法
+//动态添加路由的方法
 export function addRoutes(menus) {
-  // 是否有新的路由
-  let hasNewRoutes = false
-  const findAndAddRoutesByMenus = (arr) => {
-    arr.forEach((e) => {
-      let item = asyncRoutes.find((o) => o.path == e.url)
-      if (item && !router.hasRoute(item.path)) {
-        router.addRoute('admin', item)
-        hasNewRoutes = true
-      }
-      if (e.children && e.children.length > 0) {
-        findAndAddRoutesByMenus(e.children)
-      }
-    })
-  }
-
-  findAndAddRoutesByMenus(menus)
-
-  return hasNewRoutes
+	//是否有新的路由
+	let hadNewRoutes = false
+	const findAndAddRoutesByMenus = arr => {
+		arr.forEach(e => {
+			let item = asyncRoutes.find(o => o.path == e.url)
+			if (item && !router.hasRoute(item.path)) {
+				router.addRoute('admin', item)
+				hadNewRoutes = true
+			}
+			if (e.children && e.children.length > 0) {
+				findAndAddRoutesByMenus(e.children)
+			}
+		})
+	}
+	findAndAddRoutesByMenus(menus)
+	return hadNewRoutes
 }
 
 // 全局前置导航守卫

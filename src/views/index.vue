@@ -1,42 +1,43 @@
-<!-- <script setup>
-  import { ref } from 'vue';
-  const msg = ref('测试自动导入')
-</script>
-
-<template>
-  <div class="bg-pink-300 w-50 h-50 text-white f-center">
-    <p class="text-xl">{{ msg }}</p>
-  </div>
-  <hello></hello>
-  <el-empty description="description" />
-</template> -->
-// import { login } from '@/api/auth'
 <script setup>
+import { getStatistics1 } from '../api';
 
-  // const form = reactive({
-  //   username:'admin',
-  //   password:'123456'
-  // })
-
-  // const handleLogin = ()=>{
-  //     login(form).then(res =>{
-  //     console.log(res);
-  //   })
-  // }
-  // const store = useAdminStore()
-  // const { storeLogin,getStoreInfo,storeLogout} = store  
-  const { handleLogout } = useLogout()
+const panels =ref([])
+getStatistics1()
+.then(res=>{
+  panels.value = res
+  console.log(panels.value);
+})
+ 
 </script>
 
 <template>
-  <div>
-    
-    <!-- <el-button type="primary" size="default" @click="storeLogin(form)">登录</el-button>
-    <el-button type="primary" size="default" @click="getStoreInfo">获取当前登录者信息</el-button>
-    <el-button type="primary" size="default" @click="storeLogout">退出登录</el-button> -->
-    <el-button type="primary" @click="handleLogout">登出</el-button>
+  <div class="p-3">
+    <el-row :gutter="20">
+      <el-col :span="6" v-for=" ( item,index) in panels" :key="index">
+        <el-card class="shadow hover : ( shadow-xl bg-sky-100 opacity-70 ) cursor-pointer">
+          <template #header>
+            <div class="f-between ">
+            <span class="text-sm">f{ item.title }</span>
+            <el-tag 
+                :type="item.unitcolor"
+                effect="plain" >
+                {{ item.unit }}
+            </el-tag>
+            </div>
+          </template>
+        <span class="text-3xl font-bold text-gray-500">
+          {{ item.value }}
+        </span>
+        <el-divider />
+        <div class="flex justify-between text-sm text-gray-500">
+          <span>{{ item.subTitle }}  </span>
+          <span>{{ item.subValue }}</span>
+        </div>
+        </el-card>
+      </el-col>
+    </el-row>
+  </div>
 
-</div>
 </template>
 
 

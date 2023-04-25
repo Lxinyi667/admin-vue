@@ -11,12 +11,13 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import IconResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 
+import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     WindCSS(),
-    // 自动导入
+    // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
     AutoImport({
       imports: [
         'vue',
@@ -25,12 +26,20 @@ export default defineConfig({
         'pinia',
         {
           'vue-router': ['onBeforeRouteLeave'],
-          '@/utils/tool': ['toast','showModal'],
+          '@/router': ['addRoutes'],
+          '@/utils/tool': ['toast','showModal', 'showFullLoading', 'hideFullLoading'],
           '@/utils/storage': ['getToken','setToken','removeToken'],
+          '@/hooks/useAuth':['useAccountLogin','useLogout'],
+          '@/hooks/useAdmin': ['usePassword'],
+          '@/hooks/useBreadCrumbs': ['useBreadCrumbs'],
+          '@/hooks/useNotice': ['useNotice'],
           '@/api/auth': ['login','logout','getCaptcha'],
+          '@/api/admin': ['getInfo', 'rePassword'],
+					'@/api/notice': ['getNoticePage', 'getNoticeList', 'saveNotice', 'updateNotice', 'deleteNotice', 'importNotice', 'exportNitice'],
+					'@/api/menu': ['getNav', 'getAuthority'],
           '@/stores':['useAdminStore'],
-          '@/hooks/useAuth':['useLogout'],
-          '@/api/menu':['getInfo','getAuthority']
+          
+       
         }
       ],
       //指定文件夹位置 , 加 /**可遍历子目录
@@ -38,7 +47,12 @@ export default defineConfig({
       // 生成 auto-import.d.ts 声明文件
       dts: 'src/auto-import.d.ts',
       // 解析 ElementPlus
-      resolvers: [ElementPlusResolver(), IconResolver({ prefix: 'Icon' })]
+      resolvers: [
+        // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
+				ElementPlusResolver(),
+				// 自动导入图标组件
+				IconResolver({ prefix: 'Icon' })
+			]
     }),
      Components({
       // 指定组件所在文件夹的位置，默认是 src/components，可以自行扩充
@@ -58,7 +72,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': path.resolve(__dirname, 'src')
+      // '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
   //1.打开项目后，对server进行配置
