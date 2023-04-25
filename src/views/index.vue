@@ -54,7 +54,8 @@ setTimeout(()=>{
             </div>
           </template>
         <span class="text-3xl font-bold text-gray-500">
-          {{ item.value }}
+          <!-- 使用数字动画组件 -->
+          <CountTo :value="item.value" />
         </span>
         <el-divider />
         <div class="flex justify-between text-sm text-gray-500">
